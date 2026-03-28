@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interior Sourcing Exploration Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef3f8;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #dbe3ee;
+    --primary: #0f4c81;
+    --primary-2: #1f6fb2;
+    --soft: #eaf3fb;
+    --accent: #0ea5a4;
+    --accent-soft: #e7fbfb;
+    --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    --radius: 20px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(31, 111, 178, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(14, 165, 164, 0.08), transparent 22%),
+      var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 28px;
+  }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .proposal {
+    background: var(--card);
+    border: 1px solid rgba(15, 76, 129, 0.08);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .hero {
+    position: relative;
+    padding: 34px 38px 30px;
+    background: linear-gradient(135deg, #0f4c81 0%, #123e66 45%, #0b2238 100%);
+    color: #fff;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(255,255,255,0.16), transparent 18%),
+      radial-gradient(circle at 75% 80%, rgba(255,255,255,0.08), transparent 18%);
+    pointer-events: none;
+  }
+
+  .hero-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+
+  .logo-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+  }
+
+  .logo-box img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.95);
+    padding: 6px;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .logo-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .logo-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.76);
+  }
+
+  .hero-badge {
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+
+  .hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.35fr 0.85fr;
+    gap: 26px;
+    align-items: end;
+  }
+
+  .hero h1 {
+    margin: 0 0 12px;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .hero p {
+    margin: 0;
+    max-width: 760px;
+    color: rgba(255,255,255,0.82);
+    font-size: 15px;
+  }
+
+  .hero-panel {
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .hero-panel-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.74);
+    margin-bottom: 10px;
+  }
+
+  .hero-panel ul {
+    margin: 0;
+    padding-left: 18px;
+    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+  }
+
+  .hero-panel li + li { margin-top: 8px; }
+
+  .content {
+    padding: 34px 38px 40px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: -18px;
+    margin-bottom: 26px;
+  }
+
+  .stat {
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbfe 100%);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .stat-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+
+  .stat-note {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .section {
+    margin-top: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: end;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .section-title-wrap {
+    max-width: 760px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .section h2 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .section-desc {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--soft);
+    color: var(--primary);
+    border: 1px solid rgba(15, 76, 129, 0.12);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.04);
+  }
+
+  thead th {
+    background: linear-gradient(180deg, #103d66 0%, #0f4c81 100%);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    font-size: 14px;
+  }
+
+  tbody tr:nth-child(even) td {
+    background: #fbfdff;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .muted {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: #0b6e6d;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 18px;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+    padding: 20px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+  }
+
+  .card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+  }
+
+  .checklist li {
+    position: relative;
+    padding-left: 24px;
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  .checklist li + li { margin-top: 10px; }
+
+  .checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .step {
+    position: relative;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .step-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--soft);
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .step-text {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .summary-box {
+    margin-top: 20px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #0f4c81 0%, #174f84 100%);
+    color: #fff;
+    padding: 24px;
+  }
+
+  .summary-box h3 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .summary-box p {
+    margin: 0;
+    color: rgba(255,255,255,0.84);
+    max-width: 760px;
+    font-size: 14px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .summary-item {
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+
+  .summary-item strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .summary-item span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .footer-note {
+    margin-top: 22px;
+    font-size: 12px;
+    color: #6b7280;
+    text-align: center;
+  }
+
+  @media (max-width: 920px) {
+    .hero-grid,
+    .grid-2,
+    .timeline,
+    .summary-grid,
+    .stats {
+      grid-template-columns: 1fr;
+    }
+
+    .content,
+    .hero {
+      padding: 24px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="proposal">
+      <section class="hero">
+        <div class="hero-top">
+          <div class="logo-box">
+            <!-- Replace proposal-logo.png with your actual logo asset path -->
+            <img src="proposal-logo.png" alt="Logo" />
+            <div class="logo-text">
+              <div class="logo-title">Proposal Overview</div>
+              <div class="logo-sub">Interior Sourcing Exploration Plan</div>
+            </div>
+          </div>
+          <div class="hero-badge">International Market Discovery</div>
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <h1>Building a Smarter Global Sourcing Base for Interior Projects</h1>
+            <p>
+              This proposal outlines a structured exploration plan to identify cost-effective,
+              design-forward, and project-relevant interior products from international sourcing
+              clusters, while building a long-term procurement advantage.
+            </p>
+          </div>
+          <div class="hero-panel">
+            <div class="hero-panel-title">Core Focus</div>
+            <ul>
+              <li>Product categories with strong design and cost advantage</li>
+              <li>High-density supplier markets for faster comparisons</li>
+              <li>Exploration budget, feasibility, and next-stage execution path</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="content">
+        <section class="stats">
+          <div class="stat">
+            <div class="stat-label">Primary Region</div>
+            <div class="stat-value">South China</div>
+            <div class="stat-note">Best blend of interiors, lighting, and automation clusters.</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Trip Structure</div>
+            <div class="stat-value">6–8 Days</div>
+            <div class="stat-note">Compact exploration with supplier comparison and shortlist creation.</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Budget Estimate</div>
+            <div class="stat-value">~₹1.5L</div>
+            <div class="stat-note">Per person for travel, stay, movement, and basic exploration costs.</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Strategic Outcome</div>
+            <div class="stat-value">Supplier Base</div>
+            <div class="stat-note">Reusable sourcing network for future projects and potential scale-up.</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="eyebrow">Section 01</span>
+              <h2>Objective & Category Focus</h2>
+              <p class="section-desc">
+                The goal is to identify product categories that combine strong project value, design appeal,
+                and cost efficiency for long-term use across interior projects.
+              </p>
+            </div>
+            <div class="chip">High usability + repeatability + sourcing advantage</div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 24%">Category</th>
+                <th style="width: 36%">Examples</th>
+                <th>Why It Matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Decorative & Smart Lighting</strong></td>
+                <td>Chandeliers, pendants, wall lights, smart lighting systems</td>
+                <td>High visual impact, broad product variety, and strong price advantage in global clusters.</td>
+              </tr>
+              <tr>
+                <td><strong>Smart Home & Automation</strong></td>
+                <td>Smart locks, switches, sensors, curtain motors</td>
+                <td>Helps create premium, modern project offerings with differentiated value.</td>
+              </tr>
+              <tr>
+                <td><strong>Bathroom & Kitchen Fittings</strong></td>
+                <td>Sanitary ware, faucets, shower systems, accessories</td>
+                <td>Useful for both compact and premium projects with better material options.</td>
+              </tr>
+              <tr>
+                <td><strong>Surface & Finish Materials</strong></td>
+                <td>Decorative panels, laminates, wall finishes, textures</td>
+                <td>Critical for visual differentiation and premium look within controlled budgets.</td>
+              </tr>
+              <tr>
+                <td><strong>Modular Hardware</strong></td>
+                <td>Sliding systems, concealed mechanisms, fittings</td>
+                <td>Improves functionality and space efficiency for modern residential interiors.</td>
+              </tr>
+              <tr>
+                <td><strong>Décor & Accent Products</strong></td>
+                <td>Mirrors, décor accessories, designer elements</td>
+                <td>Ideal for finishing touches and future small-volume or wholesale opportunities.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="eyebrow">Section 02</span>
+              <h2>Target Sourcing Clusters</h2>
+              <p class="section-desc">
+                These locations are selected because they concentrate large numbers of relevant suppliers,
+                making it practical to evaluate multiple product options in a short time.
+              </p>
+            </div>
+            <div class="chip">Cluster-based sourcing, not random supplier hunting</div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 18%">Market</th>
+                <th style="width: 12%">Country</th>
+                <th style="width: 26%">Key Products</th>
+                <th style="width: 16%">Indicative Scale</th>
+                <th>Why This Matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Foshan</strong></td>
+                <td>China</td>
+                <td>Furniture, panels, sanitary ware, surfaces</td>
+                <td>Large manufacturing cluster</td>
+                <td>Strong one-region sourcing base for core interior materials and product comparisons.</td>
+              </tr>
+              <tr>
+                <td><strong>Zhongshan (Guzhen)</strong></td>
+                <td>China</td>
+                <td>Lighting, LED, smart lighting</td>
+                <td>Major lighting hub</td>
+                <td>High product density, design variety, and competitive pricing for lighting categories.</td>
+              </tr>
+              <tr>
+                <td><strong>Shenzhen</strong></td>
+                <td>China</td>
+                <td>Automation, smart home, connected devices</td>
+                <td>Global electronics center</td>
+                <td>Best suited for advanced, automated, and higher-tech home products.</td>
+              </tr>
+              <tr>
+                <td><strong>Yiwu</strong></td>
+                <td>China</td>
+                <td>Décor, mirrors, small accessories</td>
+                <td>Mass supplier ecosystem</td>
+                <td>Ideal for broad assortment, quick sourcing, and lower-MOQ decorative items.</td>
+              </tr>
+              <tr>
+                <td><strong>Vietnam / Malaysia</strong></td>
+                <td>Alternative</td>
+                <td>Furniture and selected interior products</td>
+                <td>Backup sourcing options</td>
+                <td>Useful nearby alternatives for comparison, diversification, and future expansion.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section grid-2">
+          <div class="card">
+            <h3>Why the Trip is Valuable</h3>
+            <p>
+              The purpose is not just to visit markets, but to build a sourcing blueprint that improves
+              product options, cost structure, and project competitiveness over time.
+            </p>
+            <ul class="checklist">
+              <li>Evaluate multiple suppliers in concentrated clusters instead of isolated searches</li>
+              <li>Compare quality, price, customization, and practical project fit on-ground</li>
+              <li>Create a reusable supplier base for future projects and repeat procurement</li>
+              <li>Identify premium-looking products that can still fit budget-sensitive projects</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>What This Exploration Should Answer</h3>
+            <ul class="checklist">
+              <li>Which categories create the strongest design and cost advantage</li>
+              <li>Which markets are most practical for ongoing sourcing</li>
+              <li>What landed-cost opportunities exist versus local alternatives</li>
+              <li>What operational structure should be built after exploration</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="eyebrow">Section 03</span>
+              <h2>Exploration Travel Cost Estimate</h2>
+              <p class="section-desc">
+                A practical estimate for a focused 6–8 day trip covering sourcing visits, supplier comparisons,
+                local movement, and initial sample-level exploration.
+              </p>
+            </div>
+            <div class="chip">Compact estimate for better planning</div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 34%">Cost Component</th>
+                <th style="width: 20%">Estimated Cost</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Flights</strong></td>
+                <td>₹45,000</td>
+                <td>Return travel from India to primary South China cluster.</td>
+              </tr>
+              <tr>
+                <td><strong>Visa</strong></td>
+                <td>₹8,000</td>
+                <td>Entry and processing for business/exploration travel.</td>
+              </tr>
+              <tr>
+                <td><strong>Accommodation</strong></td>
+                <td>₹50,000</td>
+                <td>Business-stay estimate for 6–8 nights in cluster-linked cities.</td>
+              </tr>
+              <tr>
+                <td><strong>Local Movement</strong></td>
+                <td>₹15,000</td>
+                <td>Intercity movement, taxis, metro, supplier visit transport.</td>
+              </tr>
+              <tr>
+                <td><strong>Food & Daily Expenses</strong></td>
+                <td>₹12,000</td>
+                <td>Basic day-to-day business travel expenses.</td>
+              </tr>
+              <tr>
+                <td><strong>Samples & Miscellaneous</strong></td>
+                <td>₹20,000</td>
+                <td>Basic sample handling, small purchases, contingency, and utilities.</td>
+              </tr>
+              <tr>
+                <td><strong>Total Estimate</strong></td>
+                <td><strong>~₹1.5L / person</strong></td>
+                <td><span class="pill">~₹3.0L for 2 people</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="eyebrow">Section 04</span>
+              <h2>How the Work Moves Forward</h2>
+              <p class="section-desc">
+                A phased approach ensures the trip leads to a practical commercial base rather than just general market exposure.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-title">Scope Lock</div>
+              <div class="step-text">Finalize categories, design priorities, budget range, and decision parameters before travel.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-title">Market Exploration</div>
+              <div class="step-text">Visit clusters, compare suppliers, collect options, and shortlist viable products.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-title">Evaluation</div>
+              <div class="step-text">Review fit, pricing, quality, and project relevance; identify practical sourcing routes.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-title">Build Next System</div>
+              <div class="step-text">Convert findings into a sourcing model, supplier base, and long-term procurement plan.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="summary-box">
+          <h3>Expected Outcome of Phase 1</h3>
+          <p>
+            By the end of this exploration stage, the objective is to move from broad ideas to a practical sourcing foundation
+            with product clarity, market direction, supplier visibility, and a next-step execution path.
+          </p>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <strong>Product Clarity</strong>
+              <span>Shortlist of categories and materials worth sourcing internationally.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Supplier Base</strong>
+              <span>Initial supplier network and sourcing routes from high-density clusters.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Execution Path</strong>
+              <span>Clear direction on what needs to be built next for ongoing sourcing and scale.</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer-note">
+          Replace the logo asset path in the header and adjust brand colors if you want this to match your proposal system visually.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
